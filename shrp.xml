@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="SHRP-Reborn"
+            fetch="https://github.com/SHRP-Reborn"/>
+
+    <!-- We need the SHRP-Reborn forks of these repos -->
+    <remove-project name="platform/cts"/>
+    <remove-project name="platform/external/gflags"/>
+    <remove-project name="platform/test/vts-testcase/fuzz"/>
+
+    <!-- SHRP lives in SHRP-Reborn repo -->
+    <project path="bootable/recovery" name="android_bootable_recovery" remote="SHRP-Reborn" revision="android-12.1"/>
+
+    <!-- Use SHRP-Reborn repos for full recovery compatibility -->
+    <project path="build/make" name="android_build" remote="SHRP-Reborn" revision="android-12.1" groups="pdk">
+        <copyfile src="core/root.mk" dest="Makefile"/>
+        <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
+        <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
+        <linkfile src="core" dest="build/core"/>
+        <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
+        <linkfile src="target" dest="build/target"/>
+        <linkfile src="tools" dest="build/tools"/>
+        <linkfile src="shrp" dest="build/shrp" />
+    </project>
+    <project path="build/soong" name="android_build_soong" remote="TeamWin" revision="android-12.1">
+        <linkfile src="root.bp" dest="Android.bp"/>
+        <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
+    </project>
+    <project path="system/core" name="android_system_core" remote="TeamWin" revision="android-12.1"/>
+    <project path="system/security" name="android_system_security" remote="TeamWin" revision="android-12.1"/>
+    <project path="system/vold" name="android_system_vold" remote="TeamWin" revision="android-12.1"/>
+
+    <!-- Use SHRP-Reborn custom vendor repo for build system -->
+    <project path="vendor/shrp" name="android_vendor_shrp" remote="SHRP-Reborn" revision="android-12.1"/>
+    <project path="vendor/twrp" name="android_vendor_twrp" remote="SHRP-Reborn" revision="android-12.1" />
+</manifest>

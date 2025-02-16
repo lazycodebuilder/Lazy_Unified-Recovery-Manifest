@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- Include twrp.xml -->
+    <include name="twrp.xml" />
+</manifest>
